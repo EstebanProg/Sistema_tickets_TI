@@ -6,6 +6,7 @@ from ..database import get_db
 from ..models import Ticket
 from ..schemas import TicketIn, TicketOut, TicketUpdate
 
+#rrrrrr
 
 router = APIRouter(prefix="/tickets", tags=["tickets"])
 DB = Annotated[Session, Depends(get_db)]
