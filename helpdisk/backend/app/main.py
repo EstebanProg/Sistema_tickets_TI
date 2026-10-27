@@ -1,11 +1,12 @@
 import time
 from contextlib import asynccontextmanager
 
-from routers import tickets
+
 from fastapi import APIRouter,FastAPI
 from sqlalchemy import select
 from sqlalchemy.exc import OperationalError
 
+from .routers import tickets,auth
 from .config import settings
 from .database import Base, SessionLocal, engine
 from .models import Role, User
@@ -13,7 +14,7 @@ from .security import hash_password
 
 
 def init_db():
-    for _ in range(10):  # la BD puede tardar unos segundos en aceptar conexiones
+    for _ in range(10):  
         try:
             Base.metadata.create_all(engine)
             break
@@ -52,3 +53,5 @@ def health():
 api = APIRouter(prefix="/api")
 api.include_router(tickets.router)
 app.include_router(api)
+api.include_router(auth.router)
+api.include_router(tickets.router)

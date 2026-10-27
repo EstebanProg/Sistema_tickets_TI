@@ -17,7 +17,7 @@ def list_tickets(db: DB):
     query = select(Ticket).order_by(Ticket.created_at.desc())
     return db.scalars(query).all()
 
-@router.podst("", response_model=TicketOut, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=TicketOut, status_code=status.HTTP_201_CREATED)
 def create_ticket(data: TicketIn, db: DB):
     ticket = Ticket(**data.model_dump(), author_id=TEMP_AUTOR_ID)
     db.add(ticket)
