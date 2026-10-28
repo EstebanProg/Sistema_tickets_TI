@@ -6,7 +6,7 @@ from fastapi import APIRouter,FastAPI
 from sqlalchemy import select
 from sqlalchemy.exc import OperationalError
 
-from .routers import tickets,auth
+from .routers import tickets,auth, users
 from .config import settings
 from .database import Base, SessionLocal, engine
 from .models import Role, User
@@ -55,3 +55,4 @@ api.include_router(tickets.router)
 app.include_router(api)
 api.include_router(auth.router)
 api.include_router(tickets.router)
+api.include_router(users.router)

@@ -50,3 +50,8 @@ class TicketOut(ORM):
     status: TicketStatus
     created_at: datetime
     author: AuthorOut
+
+class UserUpdate(BaseModel):
+    role: Role | None = None
+    is_active: bool | None = None
+
