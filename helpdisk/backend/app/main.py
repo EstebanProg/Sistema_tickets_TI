@@ -11,6 +11,7 @@ from .config import settings
 from .database import Base, SessionLocal, engine
 from .models import Role, User
 from .security import hash_password
+from fastapi.middleware.cors import CORSMiddleware
 
 
 def init_db():
@@ -44,6 +45,14 @@ async def lifespan(_: FastAPI):
 
 
 app = FastAPI(title="HelpDesk API", lifespan=lifespan)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[o.strip() for o in settings.cors_origins.split(",")],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/api/health")
