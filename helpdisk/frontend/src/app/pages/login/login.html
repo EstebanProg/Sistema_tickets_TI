@@ -8,4 +8,9 @@
     <button>Entrar</button>
   </form>
   <p>¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>
+  
+      @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+    <button [disabled]="loading()">Entrar</button>
 </div>
